@@ -38,4 +38,5 @@ CLASS zminmax IMPLEMENTATION.
     out->write( |Maximum: | && |{ lr_table[ lines( lr_table ) ]-low }| ).
 
   ENDMETHOD.
+  
 ENDCLASS.
