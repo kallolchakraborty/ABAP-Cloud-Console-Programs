@@ -1,2 +1,2 @@
 # ABAP-Cloud-Console-Programs
-ABAP on cloud (console) programs
+ABAP on Cloud (console) programs
