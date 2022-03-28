@@ -185,7 +185,7 @@ ENDCLASS.
 * class implementation
 CLASS zcl_test_class_01 IMPLEMENTATION.
 ENDCLASS.
-* creation of the object
+* creating the object
 DATA(lo_object_02) = NEW zcl_test_class_01( ).
 
 *--------------------------------------------------------------------*
