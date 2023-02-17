@@ -1,4 +1,4 @@
-CLASS znextpermutation DEFINITION
+CLASS zcl_algo_nxtpermut DEFINITION
   PUBLIC
   FINAL
   CREATE PUBLIC .
@@ -9,9 +9,11 @@ CLASS znextpermutation DEFINITION
 
   PROTECTED SECTION.
   PRIVATE SECTION.
-
     TYPES ty_nums TYPE STANDARD TABLE OF i WITH EMPTY KEY.
-    DATA lt_nums  TYPE STANDARD TABLE OF i WITH EMPTY KEY.
+*    DATA lt_nums  TYPE STANDARD TABLE OF i WITH EMPTY KEY.
+
+    METHODS getNextPermutation
+      CHANGING lt_nums TYPE STANDARD TABLE.
 
     METHODS reverseNumbers
       CHANGING lt_nums TYPE ty_nums
@@ -26,13 +28,25 @@ CLASS znextpermutation DEFINITION
 ENDCLASS.
 
 
-CLASS znextpermutation IMPLEMENTATION.
+CLASS zcl_algo_nxtpermut IMPLEMENTATION.
 
   METHOD if_oo_adt_classrun~main.
 
-*    lt_nums = VALUE #( ( 3 ) ( 2 ) ( 1 ) ).
-*    lt_nums = VALUE #( ( 1 ) ( 2 ) ( 3 ) ).
-    lt_nums = VALUE #( ( 1 ) ( 3 ) ( 5 ) ( 4 ) ( 2 ) ).
+*    lt_nums = VALUE ty_nums( ( 3 ) ( 2 ) ( 1 ) ).
+    DATA(lt_nums) = VALUE ty_nums( ( 1 ) ( 3 ) ( 5 ) ( 4 ) ( 2 ) ).
+*    lt_nums = VALUE ty_nums( ( 1 ) ( 2 ) ( 3 ) ).
+
+*   calling the method
+    getNextPermutation( CHANGING lt_nums = lt_nums ).
+
+    out->write( |next permutation:------->| ).
+    out->write( lt_nums ).
+
+    FREE lt_nums.
+
+  ENDMETHOD.
+
+  METHOD getNextPermutation.
 
     DATA(lv_i) = 1.
     DATA(lv_j) = 1.
@@ -77,8 +91,6 @@ CLASS znextpermutation IMPLEMENTATION.
 
     UNASSIGN <lf_wa>.
     FREE: lv_i, lv_j.
-
-    out->write( lt_nums ).
 
   ENDMETHOD.
 

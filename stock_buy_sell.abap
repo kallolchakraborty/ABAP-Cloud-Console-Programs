@@ -1,4 +1,4 @@
-CLASS zstockbuysell DEFINITION
+CLASS zcl_stock_buy_sell DEFINITION
   PUBLIC
   FINAL
   CREATE PUBLIC .
@@ -20,7 +20,7 @@ CLASS zstockbuysell DEFINITION
 ENDCLASS.
 
 
-CLASS zstockbuysell IMPLEMENTATION.
+CLASS zcl_stock_buy_sell IMPLEMENTATION.
 
   METHOD if_oo_adt_classrun~main.
     out->write( |{ StockBuySell( VALUE #( ( 7 ) ( 1 ) ( 5 ) ( 3 ) ( 6 ) ( 4 ) ) ) }| ).

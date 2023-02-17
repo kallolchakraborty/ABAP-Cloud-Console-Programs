@@ -1,4 +1,4 @@
-CLASS zdutchnationalflag DEFINITION
+CLASS zcl_algo_dnf DEFINITION
   PUBLIC
   FINAL
   CREATE PUBLIC .
@@ -9,7 +9,11 @@ CLASS zdutchnationalflag DEFINITION
 
   PROTECTED SECTION.
   PRIVATE SECTION.
+    TYPES ty_nums TYPE STANDARD TABLE OF i WITH EMPTY KEY.
     DATA lt_nums  TYPE STANDARD TABLE OF i WITH EMPTY KEY.
+
+    METHODS sortNumbers
+      CHANGING lt_nums TYPE STANDARD TABLE.
 
     METHODS swapNumbers
       CHANGING lt_nums TYPE STANDARD TABLE
@@ -18,11 +22,25 @@ CLASS zdutchnationalflag DEFINITION
 
 ENDCLASS.
 
-CLASS zdutchnationalflag IMPLEMENTATION.
+CLASS zcl_algo_dnf IMPLEMENTATION.
 
   METHOD if_oo_adt_classrun~main.
 
-    lt_nums = VALUE #( ( 2 ) ( 0 ) ( 2 ) ( 1 ) ( 1 ) ( 0 ) ).
+    DATA(lo_obj) = NEW zcl_algo_dnf( ).
+
+*   data
+    lt_nums = VALUE ty_nums( ( 2 ) ( 0 ) ( 2 ) ( 1 ) ( 1 ) ( 0 ) ).
+*   calling the method
+    lo_obj->sortNumbers( CHANGING lt_nums = lt_nums ).
+
+    out->write( |after sorting:------->| ).
+    out->write( lt_nums ).
+
+    FREE lt_nums.
+
+  ENDMETHOD.
+
+  METHOD sortNumbers.
 
 *   indexes
     DATA(lv_low) = 1.
@@ -47,11 +65,6 @@ CLASS zdutchnationalflag IMPLEMENTATION.
       ENDCASE.
     ENDWHILE.
 
-    LOOP AT lt_nums ASSIGNING FIELD-SYMBOL(<lfs_wa>).
-      out->write( |{ <lfs_wa> }| ).
-    ENDLOOP.
-
-    UNASSIGN <lfs_wa>.
     FREE: lv_low, lv_mid, lv_high.
 
   ENDMETHOD.
